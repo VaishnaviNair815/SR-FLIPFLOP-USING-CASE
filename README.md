@@ -1,4 +1,4 @@
-# SR-FLIPFLOP-USING-CASE
+# SR-FLIPFLOP-USING-CASE #
 
 **AIM:**
 
@@ -8,7 +8,7 @@ To implement  SR flipflop using verilog and validating their functionality using
 
 Quartus prime
 
-**THEORY**
+**THEORY:**
 
 SR Flip-Flop SR flip-flop operates with only positive clock transitions or negative clock transitions. Whereas, SR latch operates with enable signal. The circuit diagram of SR flip-flop is shown in the following figure.
 
@@ -32,17 +32,60 @@ By using three variable K-Map, we can get the simplified expression for next sta
  
 The maximum possible groupings of adjacent ones are already shown in the figure. Therefore, the simplified expression for next state Qt+1t+1 is Q(t+1)=S+R′Q(t)Q(t+1)=S+R′Q(t)
 
-**Procedure**
+**Procedure:**
 
-/* write all the steps invloved */
+1.	Type the program in Quartus software.
 
-**PROGRAM**
+2.	Compile and run the program.
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
+3.	Generate the RTL schematic and save the logic diagram.
+
+4.	Create nodes for inputs and outputs to generate the timing diagram.
+
+5.	For different input combinations generate the timing diagram.
+
+**PROGRAM:**
+
+/* Program for flipflops and verify its truth table in quartus using Verilog programming. 
+
+Developed by: VAISHNAVI R NAIR
+
+RegisterNumber: 24003448
+
 */
 
-**RTL LOGIC FOR FLIPFLOPS**
+```
+module sr_ff (s, r, clk, rst, q);
+  input s, r, clk, rst;
+  output reg q;
 
-**TIMING DIGRAMS FOR FLIP FLOPS**
+  always @(posedge clk or posedge rst)
+ begin
+    if (rst)
+      q <= 0; // Reset the flip-flop
+    else
+ begin
+      case ({s, r}) // S and R control the behavior
+        2'b00: q <= q;    // No change
+        2'b01: q <= 0;    // Reset
+        2'b10: q <= 1;    // Set
+        2'b11: q <= 0;    // Invalid state, typically treated as reset
+      endcase
+    end
+  end
+endmodule
+```
 
-**RESULTS**
+**RTL:**
+
+<img width="617" alt="EXP 6 RTL" src="https://github.com/user-attachments/assets/d5e380d5-bd9f-4948-82ec-520970ba3579" />
+
+
+**TIMING DIAGRAM:**
+
+<img width="937" alt="EXP 6 WF" src="https://github.com/user-attachments/assets/d05ff72f-c650-42ad-a74b-6f77c3fd0bda" />
+
+
+**RESULT:**
+
+SR flipflop implemented using verilog and their functionality validated using their functional tables.
